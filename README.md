@@ -1,2 +1,2 @@
 # energy-refurbishment-grants-api
-Energy Refurbishment Grants
+Energy Refurbishment Grants API
