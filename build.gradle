@@ -4,7 +4,8 @@ buildscript {
         maven { url 'https://repo.spring.io/libs-milestone' }
     }
     dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.RC1'
+        // create stand-alone, production-grade Spring based Applications
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.RC2'
     }
 }
 
@@ -19,6 +20,9 @@ plugins {
 // create stand-alone, production-grade Spring based Applications
 apply plugin: 'org.springframework.boot'
 
+// generates files that are used by IntelliJ IDEA
+apply plugin: 'idea'
+
 group = 'com.jad'
 version = '0.0.1-SNAPSHOT'
 
@@ -31,6 +35,15 @@ mainClassName = 'com.jad.energy.refurbishment.grants.api.AppController'
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     compile 'org.springframework.boot:spring-boot-starter-web'
+
+    // generate swagger specification
+    compile 'io.springfox:springfox-swagger2:2.8.0'
+
+    // generate swagger ui
+    compile 'io.springfox:springfox-swagger-ui:2.8.0'
+
+    compile 'javax.xml.bind:jaxb-api:2.2.4'
+
 
     // Use test frameworks
     testCompile 'org.springframework.boot:spring-boot-starter-test'
