@@ -44,6 +44,9 @@ dependencies {
 
     compile 'javax.xml.bind:jaxb-api:2.2.4'
 
+    // production-ready features
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+
 
     // Use test frameworks
     testCompile 'org.springframework.boot:spring-boot-starter-test'

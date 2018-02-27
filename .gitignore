@@ -69,6 +69,10 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+.idea/
+*.iml
+*.ipr
+
 ### Gradle template
 .gradle
 /build/
@@ -86,4 +90,3 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 ### Project
-.idea/
