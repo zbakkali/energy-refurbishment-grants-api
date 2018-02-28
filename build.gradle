@@ -30,7 +30,7 @@ sourceCompatibility = 9
 targetCompatibility = 9
 
 // Define the main class for the application
-mainClassName = 'com.jad.energy.refurbishment.grants.api.AppController'
+mainClassName = 'com.jad.energy.refurbishment.grants.api.Application'
 
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
