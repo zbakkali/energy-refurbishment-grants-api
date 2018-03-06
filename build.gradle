@@ -1,63 +1,56 @@
-// External dependencies for the build script
-buildscript {
-    repositories {
-        maven { url 'https://repo.spring.io/libs-milestone' }
-    }
-    dependencies {
-        // create stand-alone, production-grade Spring based Applications
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.RC2'
-    }
-}
-
 plugins {
     // Apply the application plugin to add support for building an application
     id 'application'
 
+    // create stand-alone, production-grade Spring based Applications
+    id 'org.springframework.boot' version '2.0.0.RELEASE'
+
     // provides Maven-like dependency management and exclusions
-    id 'io.spring.dependency-management' version '1.0.3.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.4.RELEASE'
+
+    // orchestrating docker builds and pushes
+    id 'com.palantir.docker' version '0.19.2'
 }
 
-// create stand-alone, production-grade Spring based Applications
-apply plugin: 'org.springframework.boot'
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
-// generates files that are used by IntelliJ IDEA
-apply plugin: 'idea'
+    // generate swagger specification
+    implementation 'io.springfox:springfox-swagger2:2.8.0'
 
-group = 'com.jad'
-version = '0.0.1-SNAPSHOT'
+    // generate swagger ui
+    implementation 'io.springfox:springfox-swagger-ui:2.8.0'
+
+    implementation 'javax.xml.bind:jaxb-api:2.2.4'
+
+    // production-ready features
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // Use test frameworks
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+repositories {
+    jcenter()
+}
+
+version = '0.1.0'
 
 sourceCompatibility = 9
 targetCompatibility = 9
 
+jar {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                'Implementation-Version': project.version)
+    }
+}
+
 // Define the main class for the application
 mainClassName = 'com.jad.energy.refurbishment.grants.api.Application'
 
-dependencies {
-    // This dependency is found on compile classpath of this component and consumers.
-    compile 'org.springframework.boot:spring-boot-starter-web'
-
-    // generate swagger specification
-    compile 'io.springfox:springfox-swagger2:2.8.0'
-
-    // generate swagger ui
-    compile 'io.springfox:springfox-swagger-ui:2.8.0'
-
-    compile 'javax.xml.bind:jaxb-api:2.2.4'
-
-    // production-ready features
-    compile 'org.springframework.boot:spring-boot-starter-actuator'
-
-
-    // Use test frameworks
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
-}
-
-// In this section you declare where to find the dependencies of your project
-repositories {
-    // Use jcenter for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
-    maven {
-        url 'https://repo.spring.io/libs-snapshot'
-    }
+docker {
+    name "zoubair/${project.name}:${project.version}"
+    files jar.archivePath
+    buildArgs(['JAR_FILE': "${jar.archiveName}"])
 }
