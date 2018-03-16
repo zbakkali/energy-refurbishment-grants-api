@@ -12,6 +12,16 @@ plugins {
     id 'com.palantir.docker' version '0.19.2'
 }
 
+//  generates files that are used by IntelliJ IDEA
+apply plugin: "idea"
+
+dependencyManagement {
+    imports {
+        // needed for Spring Cloud Config Client
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Finchley.M8"
+    }
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
@@ -26,12 +36,19 @@ dependencies {
     // production-ready features
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
+    // connect to the Config Server
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+
     // Use test frameworks
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 repositories {
     jcenter()
+    maven {
+        // needed for Spring Cloud Config Client
+        url 'https://repo.spring.io/libs-milestone'
+    }
 }
 
 version = '0.1.0'
@@ -39,15 +56,15 @@ version = '0.1.0'
 sourceCompatibility = 9
 targetCompatibility = 9
 
+// Define the main class for the application
+mainClassName = 'com.jad.energy.refurbishment.grants.api.Application'
+
 jar {
     manifest {
         attributes('Implementation-Title': project.name,
                 'Implementation-Version': project.version)
     }
 }
-
-// Define the main class for the application
-mainClassName = 'com.jad.energy.refurbishment.grants.api.Application'
 
 docker {
     name "zoubair/${project.name}:${project.version}"

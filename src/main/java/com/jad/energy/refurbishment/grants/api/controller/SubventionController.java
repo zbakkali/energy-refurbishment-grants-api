@@ -5,10 +5,9 @@ import com.jad.energy.refurbishment.grants.api.model.RevenusTypeEnum;
 import com.jad.energy.refurbishment.grants.api.model.ScenarioSubvention;
 import com.jad.energy.refurbishment.grants.api.model.Subvention;
 import com.jad.energy.refurbishment.grants.api.service.RevenusTypeService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -16,8 +15,17 @@ import java.util.Set;
 
 import static java.util.stream.Collectors.toList;
 
+@RefreshScope
 @RestController
 public class SubventionController {
+
+    @Value("${message:Hello default}")
+    private String message;
+
+    @GetMapping("/message")
+    String getMessage() {
+        return this.message;
+    }
 
     private RevenusTypeService anahRevenusTypeServiceImpl;
     private RevenusTypeService departementalRevenusTypeServiceImpl;
