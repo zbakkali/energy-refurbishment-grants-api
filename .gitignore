@@ -70,8 +70,6 @@ crashlytics-build.properties
 fabric.properties
 
 .idea/
-*.iml
-*.ipr
 
 ### Gradle template
 .gradle
