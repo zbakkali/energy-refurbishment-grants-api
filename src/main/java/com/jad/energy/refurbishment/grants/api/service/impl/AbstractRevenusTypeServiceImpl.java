@@ -5,7 +5,7 @@ import com.jad.energy.refurbishment.grants.api.service.RevenusTypeService;
 
 public abstract class AbstractRevenusTypeServiceImpl implements RevenusTypeService {
 
-    protected RevenusTypeEnum computeRevenusType(final double revenus, final double tresModesteMax, final double modesteMax) {
+    protected RevenusTypeEnum computeRevenusType(double revenus, double tresModesteMax, double modesteMax) {
         if (revenus < tresModesteMax) {
             return RevenusTypeEnum.TRES_MODESTE;
         }
@@ -15,7 +15,7 @@ public abstract class AbstractRevenusTypeServiceImpl implements RevenusTypeServi
         return RevenusTypeEnum.NON_MODESTE;
     }
 
-    protected RevenusTypeEnum computeRevenusType(final double revenus, final double tresModesteMax, final double modesteMax, final double intermediairesMax) {
+    protected RevenusTypeEnum computeRevenusType(double revenus, double tresModesteMax, double modesteMax, double intermediairesMax) {
         if (revenus < tresModesteMax) {
             return RevenusTypeEnum.TRES_MODESTE;
         }

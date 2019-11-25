@@ -3,3 +3,10 @@ management:
     web:
       exposure:
         include: '*'
+
+revenus:
+  description: 'Revenus fiscaux de référence de l''année 2016'
+composition:
+  description: 'Composition du foyer'
+requesterType:
+  description: 'Propriétaire bailleur ou Propriétaire occupant'

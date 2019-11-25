@@ -4,28 +4,28 @@ import java.util.List;
 
 public class ScenarioSubvention {
 
-    private final double scenario;
-    private final double partTravaux;
-    private final double cout;
+    private final Scenario scenario;
+    private final double quotePartRenovation;
+    private final double quotePartRenovationAvecSubvention;
     private final List<Subvention> subventions;
 
-    public ScenarioSubvention(final double scenario, final double partTravaux, final double cout, final List<Subvention> subventions) {
+    public ScenarioSubvention(Scenario scenario, double quotePartRenovation, double quotePartRenovationAvecSubvention, List<Subvention> subventions) {
         this.scenario = scenario;
-        this.partTravaux = partTravaux;
-        this.cout = cout;
+        this.quotePartRenovation = quotePartRenovation;
+        this.quotePartRenovationAvecSubvention = quotePartRenovationAvecSubvention;
         this.subventions = subventions;
     }
 
-    public double getScenario() {
+    public Scenario getScenario() {
         return scenario;
     }
 
-    public double getPartTravaux() {
-        return partTravaux;
+    public double getQuotePartRenovation() {
+        return quotePartRenovation;
     }
 
-    public double getCout() {
-        return cout;
+    public double getQuotePartRenovationAvecSubvention() {
+        return quotePartRenovationAvecSubvention;
     }
 
     public List<Subvention> getSubventions() {

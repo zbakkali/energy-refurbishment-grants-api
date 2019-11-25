@@ -1,63 +1,71 @@
 plugins {
     // Apply the application plugin to add support for building an application
-    id "application"
+    id 'application'
 
-    // create stand-alone, production-grade Spring based Applications
-    id "org.springframework.boot" version "2.0.0.RELEASE"
+    // generate files that are used by the Eclipse IDE
+    id 'eclipse'
 
-    // provides Maven-like dependency management and exclusions
-    id "io.spring.dependency-management" version "1.0.4.RELEASE"
+    // generates files that are used by IntelliJ IDEA
+    id 'idea'
+
+    // provides Spring Boot support
+    id 'org.springframework.boot' version '2.0.1.RELEASE'
+
+    // provides Maven-like dependency management functionality
+    id 'io.spring.dependency-management' version '1.0.5.RELEASE'
 
     // orchestrating docker builds and pushes
-    id "com.palantir.docker" version "0.19.2"
+    id 'com.palantir.docker' version '0.19.2'
 }
-
-//  generates files that are used by IntelliJ IDEA
-apply plugin: "idea"
 
 dependencyManagement {
     imports {
         // needed for Spring Cloud dependencies
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Finchley.M8"
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Finchley.RC1'
     }
 }
 
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
     // generate swagger specification
-    implementation "io.springfox:springfox-swagger2:2.8.0"
+    implementation 'io.springfox:springfox-swagger2:2.8.0'
 
     // generate swagger ui
-    implementation "io.springfox:springfox-swagger-ui:2.8.0"
+    implementation 'io.springfox:springfox-swagger-ui:2.8.0'
 
-    implementation "javax.xml.bind:jaxb-api:2.3.0"
+    implementation 'javax.xml.bind:jaxb-api:2.3.0'
 
     // production-ready features
-    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     // connect to the Config Server
-    implementation "org.springframework.cloud:spring-cloud-starter-config"
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
 
     // connect to the Netflix Eureka Discovery Server
-    implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
+    // generate and collect Zipkin-compatible traces via HTTP
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
 
     // Use test frameworks
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 repositories {
     jcenter()
     maven {
         // needed for Spring Cloud Config Client
-        url "https://repo.spring.io/libs-milestone"
+        url 'https://repo.spring.io/libs-milestone'
     }
 }
 
 version = "0.1.0"
 
-sourceCompatibility = 9
-targetCompatibility = 9
+sourceCompatibility = 11
+targetCompatibility = 11
 
 // Define the main class for the application
 mainClassName = "com.jad.energy.refurbishment.grants.api.Application"
